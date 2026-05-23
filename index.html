@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>English Around the World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ── */
+:root {
+  --navy:     #1a2e5a;
+  --navy-mid: #2a4480;
+  --blue:     #3b63c8;
+  --gold:     #f5a623;
+  --gold-lt:  #fef3d0;
+  --green:    #007A4D;
+  --green-lt: #d1fae5;
+  --red:      #DE3831;
+  --surface:  #ffffff;
+  --bg:       #f4f6fb;
+  --bg2:      #eaecf5;
+  --text:     #0d1b3e;
+  --text-2:   #4a5578;
+  --text-3:   #8892aa;
+  --border:   rgba(26,46,90,0.10);
+  --shadow-s: 0 2px 12px rgba(26,46,90,0.08);
+  --shadow-m: 0 6px 28px rgba(26,46,90,0.12);
+  --shadow-l: 0 16px 56px rgba(26,46,90,0.16);
+  --radius-s: 12px;
+  --radius-m: 20px;
+  --radius-l: 28px;
+  --ease:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── BACKGROUND SHAPES ── */
+.bg-shapes {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+  overflow: hidden;
+}
+.bg-shapes span {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+}
+.bg-shapes span:nth-child(1) {
+  width: 600px; height: 600px;
+  background: #c7d5f5;
+  top: -180px; left: -160px;
+}
+.bg-shapes span:nth-child(2) {
+  width: 500px; height: 500px;
+  background: #fde9b7;
+  bottom: -140px; right: -140px;
+}
+.bg-shapes span:nth-child(3) {
+  width: 300px; height: 300px;
+  background: #b7f5d8;
+  top: 40%; left: 50%;
+  transform: translateX(-50%);
+  opacity: 0.25;
+}
+
+/* ── LAYOUT ── */
+.container { max-width: 1020px; margin: 0 auto; padding: 0 28px; }
+
+/* ── HEADER ── */
+header {
+  position: relative; z-index: 1;
+  padding: 64px 28px 40px;
+  text-align: center;
+  animation: fadeDown 0.7s var(--ease-out) both;
+}
+
+.header-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--navy-mid);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 6px 18px;
+  border-radius: 99px;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-s);
+}
+
+.header-pill-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--gold);
+  animation: pulse-dot 2s infinite;
+}
+
+h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.1rem, 5.5vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+}
+h1 em {
+  font-style: normal;
+  background: linear-gradient(135deg, #3b63c8 0%, #f5a623 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  margin-top: 16px;
+  font-size: 1.05rem;
+  color: var(--text-2);
+  max-width: 480px;
+  margin-left: auto; margin-right: auto;
+  line-height: 1.7;
+}
+
+.header-icons {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+.header-icons span {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  box-shadow: var(--shadow-s);
+}
+
+/* ── MAP SECTION ── */
+.map-section {
+  position: relative; z-index: 1;
+  padding: 0 28px;
+  max-width: 1020px;
+  margin: 0 auto;
+  animation: fadeUp 0.8s 0.15s var(--ease-out) both;
+}
+
+.map-card {
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  box-shadow: var(--shadow-m);
+  border: 1.5px solid var(--border);
+  padding: 24px 24px 16px;
+  position: relative;
+  overflow: visible;
+}
+
+.map-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.map-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-3);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.map-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--green-lt);
+  color: var(--green);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 99px;
+}
+
+/* MAP IMAGE CONTAINER */
+.map-img-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius-m);
+  overflow: visible;
+  background: linear-gradient(160deg, #e8eef8 0%, #dde4f2 100%);
+  border: 1px solid var(--border);
+}
+
+.map-img-wrap img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-m);
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+/* ── PIN ── */
+.pin-wrap {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  z-index: 10;
+  cursor: pointer;
+  /* SA: bottom of Africa ~ 52% x, 70% y */
+  left: 52%;
+  top: 70%;
+  animation: pinDrop 0.7s 0.9s var(--ease) both;
+}
+
+.pin-wrap:focus { outline: none; }
+
+.pin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  transition: transform 0.22s var(--ease);
+}
+
+.pin-wrap:hover .pin,
+.pin-wrap.active .pin {
+  transform: translateY(-6px);
+}
+
+.pin-label {
+  background: var(--navy);
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 99px;
+  white-space: nowrap;
+  box-shadow: var(--shadow-m);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.pin-wrap:hover .pin-label,
+.pin-wrap.active .pin-label {
+  background: var(--gold);
+  color: var(--navy);
+  box-shadow: 0 8px 24px rgba(245,166,35,0.4);
+}
+
+.pin-stem {
+  width: 2px;
+  height: 10px;
+  background: var(--navy);
+  border-radius: 1px;
+  transition: background 0.2s;
+}
+.pin-wrap:hover .pin-stem,
+.pin-wrap.active .pin-stem { background: var(--gold); }
+
+.pin-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(26,46,90,0.3);
+  transition: background 0.2s;
+}
+.pin-wrap:hover .pin-dot,
+.pin-wrap.active .pin-dot { background: var(--gold); }
+
+.pin-pulse-ring {
+  position: absolute;
+  bottom: -4px;
+  left: 50%; transform: translateX(-50%);
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--gold);
+  animation: ring-pulse 2s infinite;
+  pointer-events: none;
+}
+
+.pin-flag {
+  width: 18px; height: 12px;
+  border-radius: 2px;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+.pf-green { background: #007A4D; flex: 1; }
+.pf-yellow { background: #FFB612; flex: 0 0 3px; }
+.pf-blue { background: #002395; flex: 1; }
+
+.map-footer-note {
+  text-align: center;
+  margin-top: 14px;
+  font-size: 0.8rem;
+  color: var(--text-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* ── SECTION DIVIDER ── */
+.section-intro {
+  position: relative; z-index: 1;
+  max-width: 1020px;
+  margin: 44px auto 0;
+  padding: 0 28px;
+  animation: fadeUp 0.7s 0.25s var(--ease-out) both;
+}
+
+.section-intro-inner {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--surface);
+  border-radius: var(--radius-m);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-s);
+}
+
+.section-flag {
+  flex-shrink: 0;
+  /* SA flag mini */
+}
+
+.sa-flag-mini {
+  width: 48px; height: 32px;
+  border-radius: 5px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  flex-shrink: 0;
+}
+
+/* SA flag SVG inline for mini version */
+.section-intro-text h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+.section-intro-text p {
+  font-size: 0.84rem;
+  color: var(--text-2);
+  margin-top: 3px;
+}
+
+.section-intro-arrow {
+  margin-left: auto;
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: var(--navy);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease), background 0.2s;
+}
+.section-intro-arrow:hover { background: var(--blue); transform: scale(1.05); }
+.section-intro-arrow svg { width: 16px; height: 16px; fill: none; stroke: #fff; stroke-width: 2; }
+
+/* ── CARDS GRID ── */
+.cards-section {
+  position: relative; z-index: 1;
+  max-width: 1020px;
+  margin: 24px auto 0;
+  padding: 0 28px 72px;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 680px) {
+  .cards-grid { grid-template-columns: 1fr; }
+}
+
+/* ── CARD BASE ── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-s);
+  overflow: hidden;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s;
+  animation: fadeUp 0.6s var(--ease-out) both;
+  position: relative;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(160deg, rgba(255,255,255,0.6) 0%, transparent 60%);
+  pointer-events: none;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-l);
+}
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.12s; }
+.card:nth-child(3) { animation-delay: 0.19s; }
+.card:nth-child(4) { animation-delay: 0.26s; }
+
+/* ── CARD: FLAG ── */
+.flag-card .flag-area {
+  width: 100%;
+  height: 148px;
+  overflow: hidden;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+  position: relative;
+}
+.flag-area svg { width: 100%; height: 100%; display: block; }
+
+.flag-card .card-body {
+  padding: 22px 22px 24px;
+}
+.flag-card .card-body h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-icon {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+}
+
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.swatch {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 8px;
+  background: var(--bg);
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  transition: transform 0.2s var(--ease);
+}
+.swatch:hover { transform: scale(1.04); }
+.swatch-dot {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(0,0,0,0.07);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.swatch-name {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ── CARD: LANGUAGE ── */
+.lang-card .card-header {
+  padding: 26px 22px 22px;
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  position: relative;
+  overflow: hidden;
+}
+.lang-card .card-header::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: -40px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+.lang-card .card-header::before {
+  content: '';
+  position: absolute;
+  top: -30px; left: 60%;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+.lang-card .ch-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.lang-card .ch-title span { font-size: 1rem; }
+.lang-stat {
+  font-family: 'Sora', sans-serif;
+  font-size: 3.4rem;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+.lang-stat-label {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+  margin-top: 4px;
+}
+
+.lang-card .card-body {
+  padding: 20px 22px 22px;
+}
+.lang-card .card-body p {
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+.lang-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 16px;
+}
+.lang-tag {
+  font-size: 0.74rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 99px;
+  border: 1.5px solid var(--border);
+  color: var(--text-2);
+  background: var(--bg);
+  transition: all 0.2s;
+}
+.lang-tag:hover { border-color: var(--blue); color: var(--blue); background: #eef1fd; }
+.lang-tag.active-tag {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+
+/* ── CARD: FUN FACT ── */
+.fact-card {
+  background: linear-gradient(145deg, #fffbea 0%, #fff8dc 100%);
+  border-color: #fde68a;
+}
+.fact-card .card-body { padding: 28px 22px; }
+.fact-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--gold);
+  color: var(--navy);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 18px;
+  box-shadow: 0 3px 12px rgba(245,166,35,0.35);
+}
+.fact-card .fact-headline {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+}
+.fact-card .fact-headline strong {
+  color: var(--red);
+  font-weight: 800;
+}
+.fact-card .fact-subtext {
+  margin-top: 14px;
+  font-size: 0.84rem;
+  color: #92400e;
+  line-height: 1.6;
+}
+.fact-callout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  background: rgba(245,166,35,0.15);
+  border-radius: 12px;
+  border: 1px solid rgba(245,166,35,0.4);
+  font-size: 0.82rem;
+  color: #78350f;
+  font-weight: 500;
+}
+.fact-callout-icon { font-size: 1.2rem; }
+
+/* ── CARD: BORROWED WORDS ── */
+.words-card .card-header {
+  padding: 22px 22px 20px;
+  background: linear-gradient(135deg, #064e3b 0%, #047857 100%);
+  position: relative;
+  overflow: hidden;
+}
+.words-card .card-header::after {
+  content: '';
+  position: absolute;
+  bottom: -50px; right: -30px;
+  width: 130px; height: 130px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+.words-card .wh-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.65);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.words-card .wh-sub {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+}
+
+.word-chips {
+  padding: 18px 18px 22px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.word-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  color: var(--navy);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 7px 14px;
+  border-radius: 99px;
+  cursor: pointer;
+  transition: all 0.22s var(--ease);
+  position: relative;
+}
+.word-chip:hover {
+  background: var(--green);
+  color: #fff;
+  border-color: var(--green);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,122,77,0.3);
+}
+.word-chip:focus {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+.word-chip-emoji { font-size: 0.9rem; }
+
+/* ── WORD MODAL ── */
+.modal-backdrop {
+  position: fixed; inset: 0;
+  background: rgba(10,15,40,0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.modal-backdrop.open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal {
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  padding: 40px 36px;
+  max-width: 420px;
+  width: 100%;
+  box-shadow: var(--shadow-l);
+  border: 1.5px solid var(--border);
+  position: relative;
+  transform: scale(0.88) translateY(24px);
+  transition: transform 0.3s var(--ease);
+}
+.modal-backdrop.open .modal {
+  transform: scale(1) translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 18px; right: 18px;
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  color: var(--text-2);
+  transition: background 0.15s, transform 0.15s;
+  line-height: 1;
+}
+.modal-close:hover { background: #fee2e2; color: var(--red); transform: scale(1.05); }
+
+.modal-emoji {
+  width: 64px; height: 64px;
+  border-radius: 18px;
+  background: var(--green-lt);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.modal h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.03em;
+  margin-bottom: 8px;
+}
+
+.modal-divider {
+  height: 2px;
+  background: linear-gradient(90deg, var(--green) 0%, transparent 100%);
+  border-radius: 2px;
+  margin: 16px 0;
+  width: 60px;
+}
+
+.modal-meaning {
+  font-size: 0.97rem;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+.modal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+  background: var(--green-lt);
+  color: var(--green);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: 99px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative; z-index: 1;
+  text-align: center;
+  padding: 12px 24px 32px;
+  font-size: 0.78rem;
+  color: var(--text-3);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pinDrop {
+  0%  { opacity: 0; transform: translate(-50%, -160%); }
+  70% { transform: translate(-50%, -94%); }
+  85% { transform: translate(-50%, -102%); }
+  100%{ opacity: 1; transform: translate(-50%, -100%); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.75); }
+}
+@keyframes ring-pulse {
+  0%   { transform: translateX(-50%) scale(1); opacity: 0.8; }
+  100% { transform: translateX(-50%) scale(2.5); opacity: 0; }
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-shapes" aria-hidden="true">
+  <span></span><span></span><span></span>
+</div>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-pill">
+    <span class="header-pill-dot"></span>
+    School Project · 2026
+  </div>
+  <h1>English <em>Around the World</em></h1>
+  <p class="subtitle">Discover how English connects with different cultures and languages around the globe.</p>
+  <div class="header-icons" aria-hidden="true">
+    <span>✈️</span><span>🌍</span><span>📚</span><span>🗺️</span><span>🌐</span>
+  </div>
+</header>
+
+<!-- ── MAP ── -->
+<section class="map-section" aria-label="Interactive world map">
+  <div class="map-card">
+    <div class="map-card-header">
+      <span class="map-card-title">Interactive Map</span>
+      <span class="map-card-badge">
+        <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true"><circle cx="5" cy="5" r="3.5" fill="#007A4D"/><circle cx="5" cy="5" r="1.5" fill="#fff"/></svg>
+        1 country active
+      </span>
+    </div>
+
+    <div class="map-img-wrap">
+      <!-- User's PNG world map -->
+      <img
+        src="world-map.png"
+        alt="World map showing continents"
+        width="1200"
+        height="600"
+        loading="eager"
+      />
+
+      <!-- South Africa Pin -->
+      <div
+        class="pin-wrap active"
+        id="pinSA"
+        tabindex="0"
+        role="button"
+        aria-label="South Africa — click to explore"
+        aria-expanded="true"
+        onclick="scrollToCards()"
+        onkeydown="if(event.key==='Enter'||event.key===' '){scrollToCards();}"
+      >
+        <div class="pin">
+          <div class="pin-label">
+            <div class="pin-flag" aria-hidden="true">
+              <div class="pf-green"></div>
+              <div class="pf-yellow"></div>
+              <div class="pf-blue"></div>
+            </div>
+            South Africa
+          </div>
+          <div class="pin-stem"></div>
+          <div class="pin-dot"></div>
+        </div>
+        <div class="pin-pulse-ring" aria-hidden="true"></div>
+      </div>
+    </div>
+
+    <div class="map-footer-note">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="#8892aa" stroke-width="1.3"/><path d="M7 6v4M7 4.5v.5" stroke="#8892aa" stroke-width="1.3" stroke-linecap="round"/></svg>
+      More countries coming soon — click the pin to explore South Africa
+    </div>
+  </div>
+</section>
+
+<!-- ── SECTION INTRO ── -->
+<div class="section-intro" id="cardsAnchor">
+  <div class="section-intro-inner">
+    <!-- SA flag mini SVG -->
+    <svg class="sa-flag-mini" viewBox="0 0 48 32" xmlns="http://www.w3.org/2000/svg" aria-label="Flag of South Africa" role="img" width="48" height="32">
+      <rect width="48" height="11" fill="#DE3831"/>
+      <rect y="21" width="48" height="11" fill="#002395"/>
+      <rect y="11" width="48" height="10" fill="#007A4D"/>
+      <polygon points="0,0 0,32 17,16" fill="#000"/>
+      <polygon points="0,0 19,16 0,32 16,32 29,16 16,0" fill="#FFB612"/>
+      <polygon points="0,0 17,16 0,32 14,32 26,16 14,0" fill="#FFF"/>
+      <polygon points="0,0 14,16 0,32 13,32 24,16 13,0" fill="#007A4D"/>
+      <polygon points="0,0 0,32 10,16" fill="#000"/>
+    </svg>
+    <div class="section-intro-text">
+      <h2>South Africa</h2>
+      <p>Exploring language, culture &amp; borrowed words</p>
+    </div>
+    <div class="section-intro-arrow" aria-hidden="true" onclick="scrollToCards()">
+      <svg viewBox="0 0 16 16"><polyline points="4 6 8 10 12 6"/></svg>
+    </div>
+  </div>
+</div>
+
+<!-- ── CARDS ── -->
+<section class="cards-section" aria-label="South Africa information cards">
+  <div class="cards-grid">
+
+    <!-- 1. FLAG -->
+    <div class="card flag-card" tabindex="0" aria-label="South African flag and its colors">
+      <div class="flag-area">
+        <svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" aria-label="Flag of South Africa" role="img">
+          <rect width="480" height="67" fill="#DE3831"/>
+          <rect y="133" width="480" height="67" fill="#002395"/>
+          <rect y="67" width="480" height="66" fill="#007A4D"/>
+          <polygon points="0,0 0,200 160,100" fill="#000000"/>
+          <polygon points="0,0 190,100 0,200 160,200 285,100 160,0" fill="#FFB612"/>
+          <polygon points="0,0 170,100 0,200 142,200 258,100 142,0" fill="#FFFFFF"/>
+          <polygon points="0,0 142,100 0,200 126,200 238,100 126,0" fill="#007A4D"/>
+          <polygon points="0,0 0,200 95,100" fill="#000000"/>
+          <!-- Shine -->
+          <rect width="480" height="200" fill="url(#flagshine)" opacity="0.08"/>
+          <defs>
+            <linearGradient id="flagshine" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#fff"/>
+              <stop offset="100%" stop-color="transparent"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <div class="card-body">
+        <h3>
+          <span class="card-icon" style="background:#fff3cd;">🎌</span>
+          Flag Colors
+        </h3>
+        <div class="swatches">
+          <div class="swatch">
+            <div class="swatch-dot" style="background:#DE3831;"></div>
+            <span class="swatch-name">Red</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background:#002395;"></div>
+            <span class="swatch-name">Blue</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background:#007A4D;"></div>
+            <span class="swatch-name">Green</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background:#FFB612; border-color:#d4a000;"></div>
+            <span class="swatch-name">Yellow</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background:#111;"></div>
+            <span class="swatch-name">Black</span>
+          </div>
+          <div class="swatch">
+            <div class="swatch-dot" style="background:#fff; border-color:#ccc;"></div>
+            <span class="swatch-name">White</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. LANGUAGE -->
+    <div class="card lang-card" tabindex="0" aria-label="Languages of South Africa">
+      <div class="card-header">
+        <div class="ch-title"><span>🗣️</span> Languages</div>
+        <div class="lang-stat">11</div>
+        <div class="lang-stat-label">Official Languages</div>
+      </div>
+      <div class="card-body">
+        <p>South Africa has 11 official languages. English is one of them and is widely used in schools, business, and media.</p>
+        <div class="lang-tags">
+          <span class="lang-tag active-tag">English</span>
+          <span class="lang-tag">Zulu</span>
+          <span class="lang-tag">Xhosa</span>
+          <span class="lang-tag">Afrikaans</span>
+          <span class="lang-tag">Sotho</span>
+          <span class="lang-tag">Tswana</span>
+          <span class="lang-tag">Venda</span>
+          <span class="lang-tag">+ 4 more</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. FUN FACT -->
+    <div class="card fact-card" tabindex="0" aria-label="Fun fact about South Africa">
+      <div class="card-body">
+        <div class="fact-badge">💡 Fun Fact</div>
+        <p class="fact-headline">
+          In South Africa, <strong>"robot"</strong> means <strong>"traffic light"</strong>.
+        </p>
+        <p class="fact-subtext">
+          South Africans use this word in everyday conversation — it comes from early automatic signal machines that were considered robotic.
+        </p>
+        <div class="fact-callout">
+          <span class="fact-callout-icon">🚦</span>
+          <span><strong>"Turn left at the robot"</strong> = Turn left at the traffic light!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. BORROWED WORDS -->
+    <div class="card words-card" tabindex="0" aria-label="Words borrowed from South Africa">
+      <div class="card-header">
+        <div class="wh-title"><span>📖</span> Borrowed Words</div>
+        <div class="wh-sub">Tap any word to discover its origin</div>
+      </div>
+      <div class="word-chips">
+        <button class="word-chip" onclick="openModal('Braai','🔥','A traditional South African barbecue — a social gathering around an open fire with family and friends.','From Afrikaans')" aria-label="Braai — tap to learn more">
+          <span class="word-chip-emoji">🔥</span> Braai
+        </button>
+        <button class="word-chip" onclick="openModal('Howzit','👋','A South African greeting meaning &quot;How are you?&quot; — used like &quot;What\'s up?&quot; in casual conversation.','From English contraction')" aria-label="Howzit — tap to learn more">
+          <span class="word-chip-emoji">👋</span> Howzit
+        </button>
+        <button class="word-chip" onclick="openModal('Zombie','🧟','Originally from the Kongo word &quot;nzambi&quot; — meaning spirit or god. Spread into English via Haiti and West Africa.','African/Kongo origin')" aria-label="Zombie — tap to learn more">
+          <span class="word-chip-emoji">🧟</span> Zombie
+        </button>
+        <button class="word-chip" onclick="openModal('Banana','🍌','From the Wolof and Mandingo word &quot;banana&quot;. Brought into English by Portuguese traders working along the West African coast.','West African origin')" aria-label="Banana — tap to learn more">
+          <span class="word-chip-emoji">🍌</span> Banana
+        </button>
+        <button class="word-chip" onclick="openModal('Safari','🦁','From Swahili and Arabic &quot;safar&quot; — meaning journey or travel. Now used worldwide to describe wildlife adventures in Africa.','From Swahili/Arabic')" aria-label="Safari — tap to learn more">
+          <span class="word-chip-emoji">🦁</span> Safari
+        </button>
+        <button class="word-chip" onclick="openModal('Tote','👜','Possibly from the Gullah/African-American word &quot;tota&quot; — meaning to carry. Now refers to a large open bag.','African-American Gullah origin')" aria-label="Tote — tap to learn more">
+          <span class="word-chip-emoji">👜</span> Tote
+        </button>
+        <button class="word-chip" onclick="openModal('Yam','🍠','From the Wolof/Fulani word &quot;nyam&quot; — meaning to eat or taste. In English it refers to a type of sweet potato.','West African origin')" aria-label="Yam — tap to learn more">
+          <span class="word-chip-emoji">🍠</span> Yam
+        </button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── MODAL ── -->
+<div
+  class="modal-backdrop"
+  id="modalBackdrop"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modalWord"
+  onclick="handleBackdropClick(event)"
+>
+  <div class="modal" role="document">
+    <button class="modal-close" id="modalCloseBtn" onclick="closeModal()" aria-label="Close">✕</button>
+    <div class="modal-emoji" id="modalEmoji" aria-hidden="true"></div>
+    <h3 id="modalWord"></h3>
+    <div class="modal-divider" aria-hidden="true"></div>
+    <p class="modal-meaning" id="modalMeaning"></p>
+    <span class="modal-badge" id="modalBadge"></span>
+  </div>
+</div>
+
+<footer>
+  English Around the World · School Project · Made with ❤️ for classroom presentation
+</footer>
+
+<script>
+  function scrollToCards() {
+    document.getElementById('cardsAnchor').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function openModal(word, emoji, meaning, badge) {
+    document.getElementById('modalWord').textContent = word;
+    document.getElementById('modalEmoji').textContent = emoji;
+    document.getElementById('modalMeaning').innerHTML = meaning;
+    document.getElementById('modalBadge').textContent = badge;
+    const bd = document.getElementById('modalBackdrop');
+    bd.classList.add('open');
+    // focus close btn after transition
+    setTimeout(() => document.getElementById('modalCloseBtn').focus(), 50);
+  }
+
+  function closeModal() {
+    document.getElementById('modalBackdrop').classList.remove('open');
+  }
+
+  function handleBackdropClick(e) {
+    if (e.target === document.getElementById('modalBackdrop')) closeModal();
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+</script>
+</body>
+</html>
