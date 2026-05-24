@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2nd Grade — May's Destination</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:     #1a2e5a;
+  --navy-mid: #2a4480;
+  --blue:     #3b63c8;
+  --gold:     #f5a623;
+  --gold-lt:  #fef3d0;
+  --green:    #007A4D;
+  --green-lt: #d1fae5;
+  --red:      #DE3831;
+  --surface:  #ffffff;
+  --bg:       #f4f6fb;
+  --text:     #0d1b3e;
+  --text-2:   #4a5578;
+  --text-3:   #8892aa;
+  --border:   rgba(26,46,90,0.10);
+  --shadow-s: 0 2px 12px rgba(26,46,90,0.08);
+  --shadow-m: 0 6px 28px rgba(26,46,90,0.12);
+  --shadow-l: 0 16px 56px rgba(26,46,90,0.16);
+  --radius-m: 20px;
+  --radius-l: 28px;
+  --ease:     cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.bg-shapes { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.bg-shapes span { position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.35; }
+.bg-shapes span:nth-child(1) { width: 500px; height: 500px; background: #d1fae5; top: -120px; right: -100px; }
+.bg-shapes span:nth-child(2) { width: 400px; height: 400px; background: #c7d5f5; bottom: -100px; left: -100px; }
+.bg-shapes span:nth-child(3) { width: 280px; height: 280px; background: #fde9b7; top: 40%; left: 60%; opacity: 0.2; }
+
+/* NAV */
+nav {
+  position: relative; z-index: 10;
+  padding: 24px 28px 0;
+  max-width: 1020px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeDown 0.5s var(--ease-out) both;
+}
+.back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--navy);
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 10px 20px 10px 14px;
+  border-radius: 99px;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: var(--shadow-s);
+  transition: all 0.2s var(--ease);
+}
+.back-btn:hover { background: var(--navy); color: #fff; border-color: var(--navy); transform: translateX(-3px); }
+.back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+.grade-badge {
+  background: var(--green);
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  padding: 8px 20px;
+  border-radius: 99px;
+  letter-spacing: 0.08em;
+  box-shadow: 0 3px 12px rgba(0,122,77,0.3);
+}
+
+/* HEADER */
+header {
+  position: relative; z-index: 1;
+  padding: 40px 28px 36px;
+  max-width: 1020px;
+  margin: 0 auto;
+  animation: fadeDown 0.6s 0.05s var(--ease-out) both;
+}
+.grade-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  color: var(--navy-mid);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 7px 18px;
+  border-radius: 99px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow-s);
+}
+h1 {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 800;
+  color: var(--navy);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+h1 em { font-style: normal; color: var(--green); }
+.header-sub { margin-top: 12px; font-size: 1.05rem; color: var(--text-2); line-height: 1.65; }
+.teachers-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 99px;
+  padding: 8px 20px;
+  font-size: 0.82rem;
+  color: var(--text-2);
+  box-shadow: var(--shadow-s);
+}
+.teachers-pill strong { color: var(--navy); }
+
+/* BODY */
+.page-body {
+  position: relative; z-index: 1;
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 28px 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.section-label h2 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--navy);
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.section-label-line { flex: 1; height: 2px; background: linear-gradient(90deg, var(--border) 0%, transparent 100%); }
+
+/* FACTS */
+.facts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+@media (max-width: 680px) { .facts-grid { grid-template-columns: 1fr; } }
+.fact-tile {
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  border: 1.5px solid var(--border);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-s);
+  animation: fadeUp 0.6s var(--ease-out) both;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s;
+}
+.fact-tile:hover { transform: translateY(-5px); box-shadow: var(--shadow-m); }
+.fact-tile:nth-child(1) { animation-delay: 0.05s; }
+.fact-tile:nth-child(2) { animation-delay: 0.1s; }
+.fact-tile:nth-child(3) { animation-delay: 0.15s; }
+.fact-tile-icon { width: 52px; height: 52px; border-radius: 15px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 16px; }
+.fact-tile h3 { font-family: 'Sora', sans-serif; font-size: 1rem; font-weight: 800; color: var(--navy); margin-bottom: 10px; text-transform: uppercase; }
+.fact-tile p { font-size: 0.9rem; color: var(--text-2); line-height: 1.7; }
+.fact-tile strong { color: var(--navy); }
+.capitals-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.capital-chip { display: inline-flex; align-items: center; gap: 6px; background: var(--gold-lt); color: var(--navy); border: 1.5px solid #fde68a; border-radius: 99px; padding: 6px 14px; font-size: 0.78rem; font-weight: 700; }
+
+/* BIG FIVE BANNER */
+.big-five-banner {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+  border-radius: var(--radius-l);
+  padding: 32px 36px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  box-shadow: var(--shadow-m);
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s var(--ease-out) both;
+}
+.big-five-banner-icon { font-size: 3.5rem; flex-shrink: 0; }
+.big-five-banner h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.big-five-banner p { font-size: 0.92rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
+
+/* ANIMAL CARDS */
+.animals-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.animal-card {
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-s);
+  overflow: hidden;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s;
+  animation: fadeUp 0.6s var(--ease-out) both;
+}
+.animal-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-l); }
+.animal-card:nth-child(1) { animation-delay: 0.04s; }
+.animal-card:nth-child(2) { animation-delay: 0.09s; }
+.animal-card:nth-child(3) { animation-delay: 0.14s; }
+.animal-card:nth-child(4) { animation-delay: 0.19s; }
+.animal-card:nth-child(5) { animation-delay: 0.24s; }
+
+.animal-img-wrap {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+}
+.animal-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.4s var(--ease-out);
+}
+.animal-card:hover .animal-img-wrap img { transform: scale(1.05); }
+
+.animal-num-badge {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: rgba(0,0,0,0.55);
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 5px 12px;
+  border-radius: 99px;
+  letter-spacing: 0.1em;
+  backdrop-filter: blur(4px);
+}
+
+.animal-body {
+  padding: 22px 24px 26px;
+}
+.animal-body h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.animal-facts { display: flex; flex-direction: column; gap: 10px; }
+.animal-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+.animal-fact-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+/* LANDMARKS */
+.landmarks-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 720px) { .landmarks-grid { grid-template-columns: 1fr; } }
+
+.landmark-card {
+  background: var(--surface);
+  border-radius: var(--radius-l);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-s);
+  overflow: hidden;
+  transition: transform 0.28s var(--ease), box-shadow 0.28s;
+  animation: fadeUp 0.6s var(--ease-out) both;
+}
+.landmark-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-l); }
+.landmark-card:nth-child(1) { animation-delay: 0.05s; }
+.landmark-card:nth-child(2) { animation-delay: 0.12s; }
+.landmark-card:nth-child(3) { animation-delay: 0.19s; }
+
+.landmark-img-wrap {
+  height: 220px;
+  overflow: hidden;
+  position: relative;
+}
+.landmark-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+  transition: transform 0.4s var(--ease-out);
+}
+.landmark-card:hover .landmark-img-wrap img { transform: scale(1.05); }
+
+/* fallback bg for boulders beach (no img) */
+.landmark-img-wrap.no-img {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 4rem;
+}
+
+.landmark-body { padding: 22px 22px 26px; }
+.landmark-body h3 {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--navy);
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.landmark-facts { display: flex; flex-direction: column; gap: 10px; }
+.landmark-fact {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: var(--text-2);
+  line-height: 1.55;
+}
+.lf-dot {
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--green);
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
+</style>
+</head>
+<body>
+
+<div class="bg-shapes" aria-hidden="true"><span></span><span></span><span></span></div>
+
+<nav>
+  <a href="index.html" class="back-btn" aria-label="Back to main page">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="10 3 5 8 10 13"/></svg>
+    Back to Map
+  </a>
+  <span class="grade-badge">2nd Grade</span>
+</nav>
+
+<header>
+  <div class="grade-tag">🎒 May's Destination · 2nd Grade</div>
+  <h1>South Africa's<br><em>Nature &amp; Wonders</em></h1>
+  <p class="header-sub">Discovering the Big Five, landmarks, and the beauty of the Rainbow Nation.</p>
+  <div class="teachers-pill">
+    👩‍🏫 <strong>Teachers:</strong> Fabiana Reis &amp; Livia Cavalheiro
+  </div>
+</header>
+
+<main class="page-body">
+
+  <!-- SA BASICS -->
+  <div>
+    <div class="section-label">
+      <h2>🌍 South Africa Basics</h2>
+      <div class="section-label-line"></div>
+    </div>
+    <div class="facts-grid">
+      <div class="fact-tile">
+        <div class="fact-tile-icon" style="background:#eef2fd;">🏙️</div>
+        <h3>Three Capitals</h3>
+        <p>South Africa has <strong>three capitals!</strong></p>
+        <div class="capitals-row">
+          <span class="capital-chip">⚖️ Pretoria</span>
+          <span class="capital-chip">🏛️ Cape Town</span>
+          <span class="capital-chip">🌸 Bloemfontein</span>
+        </div>
+      </div>
+      <div class="fact-tile" style="border-color:#fde68a; background:linear-gradient(145deg,#fffbea,#fff8dc);">
+        <div class="fact-tile-icon" style="background:rgba(245,166,35,0.15);">🎨</div>
+        <h3>Most Colorful Flag!</h3>
+        <p>6 colors — one of the <strong>most colorful flags</strong> in the world!</p>
+        <div style="margin-top:14px;">
+          <svg viewBox="0 0 160 80" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:52px;border-radius:8px;" aria-label="South African flag">
+            <rect width="160" height="27" fill="#DE3831"/>
+            <rect y="53" width="160" height="27" fill="#002395"/>
+            <rect y="27" width="160" height="26" fill="#007A4D"/>
+            <polygon points="0,0 0,80 54,40" fill="#000"/>
+            <polygon points="0,0 64,40 0,80 50,80 90,40 50,0" fill="#FFB612"/>
+            <polygon points="0,0 56,40 0,80 44,80 80,40 44,0" fill="#FFF"/>
+            <polygon points="0,0 44,40 0,80 38,80 70,40 38,0" fill="#007A4D"/>
+            <polygon points="0,0 0,80 30,40" fill="#000"/>
+          </svg>
+        </div>
+      </div>
+      <div class="fact-tile" style="border-color:#bbf7d0; background:linear-gradient(145deg,#f0fdf4,#ecfdf5);">
+        <div class="fact-tile-icon" style="background:var(--green-lt);">🗣️</div>
+        <h3>11 Languages!</h3>
+        <p>More than almost any country! <strong>English</strong> is one of them.</p>
+        <div style="margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;">
+          <span style="background:var(--green-lt);color:var(--green);border-radius:99px;padding:5px 12px;font-size:0.78rem;font-weight:700;">English</span>
+          <span style="background:var(--green-lt);color:var(--green);border-radius:99px;padding:5px 12px;font-size:0.78rem;font-weight:700;">Zulu</span>
+          <span style="background:var(--green-lt);color:var(--green);border-radius:99px;padding:5px 12px;font-size:0.78rem;font-weight:700;">Xhosa</span>
+          <span style="background:var(--green-lt);color:var(--green);border-radius:99px;padding:5px 12px;font-size:0.78rem;font-weight:700;">+ 8 more</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BIG FIVE -->
+  <div>
+    <div class="section-label">
+      <h2>🦁 The Big Five</h2>
+      <div class="section-label-line"></div>
+    </div>
+
+    <div class="big-five-banner">
+      <div class="big-five-banner-icon">🌿</div>
+      <div>
+        <h3>South Africa's Most Famous Animals</h3>
+        <p>The "Big Five" are the five most iconic wild animals in Africa. Spotting all five on a safari is an unforgettable experience!</p>
+      </div>
+    </div>
+
+    <div class="animals-grid">
+
+      <div class="animal-card">
+        <div class="animal-img-wrap">
+          <img src="lion.jpg" alt="A lion in the wild" loading="lazy"/>
+          <div class="animal-num-badge">01 · LION</div>
+        </div>
+        <div class="animal-body">
+          <h3>Lion</h3>
+          <div class="animal-facts">
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#d97706;"></div>Big and yellow</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#d97706;"></div>The lion has a beautiful mane — lionesses don't!</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#d97706;"></div>They have a very loud roar!</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#d97706;"></div>Lionesses do the hunting for food</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-img-wrap">
+          <img src="elephant.png" alt="An elephant in the wild" loading="lazy"/>
+          <div class="animal-num-badge">02 · ELEPHANT</div>
+        </div>
+        <div class="animal-body">
+          <h3>Elephant</h3>
+          <div class="animal-facts">
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#6b7280;"></div>Big and grey</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#6b7280;"></div>Has a long trunk and very big ears</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#6b7280;"></div>Loves to splash and play in water!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-img-wrap">
+          <img src="rhino.jpg" alt="A rhino in the wild" loading="lazy"/>
+          <div class="animal-num-badge">03 · RHINO</div>
+        </div>
+        <div class="animal-body">
+          <h3>Rhino</h3>
+          <div class="animal-facts">
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#007A4D;"></div>Big, grey, and very strong</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#007A4D;"></div>Has a sharp horn on its nose</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#007A4D;"></div>Loves to walk and roll in the mud</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-img-wrap">
+          <img src="leopard.png" alt="A leopard in the wild" loading="lazy"/>
+          <div class="animal-num-badge">04 · LEOPARD</div>
+        </div>
+        <div class="animal-body">
+          <h3>Leopard</h3>
+          <div class="animal-facts">
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#a16207;"></div>Big yellow cat with black spots</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#a16207;"></div>Very fast and incredibly quiet</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#a16207;"></div>Loves to climb trees!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="animal-card">
+        <div class="animal-img-wrap">
+          <img src="buffalo.png" alt="A buffalo in the wild" loading="lazy"/>
+          <div class="animal-num-badge">05 · BUFFALO</div>
+        </div>
+        <div class="animal-body">
+          <h3>Buffalo</h3>
+          <div class="animal-facts">
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#475569;"></div>Looks like a big, dark cow</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#475569;"></div>Has two strong, curved horns</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#475569;"></div>Lives in big family groups</div>
+            <div class="animal-fact"><div class="animal-fact-dot" style="background:#475569;"></div>Eats lots of green grass!</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- LANDMARKS -->
+  <div>
+    <div class="section-label">
+      <h2>🏔️ Landmarks &amp; Nature</h2>
+      <div class="section-label-line"></div>
+    </div>
+    <div class="landmarks-grid">
+
+      <div class="landmark-card">
+        <div class="landmark-img-wrap">
+          <img src="table%20mountain.jpg" alt="Table Mountain in Cape Town" loading="lazy"/>
+        </div>
+        <div class="landmark-body">
+          <h3>Table Mountain</h3>
+          <div class="landmark-facts">
+            <div class="landmark-fact"><div class="lf-dot"></div>Flat on top like a table</div>
+            <div class="landmark-fact"><div class="lf-dot"></div>Super old — dinosaur-aged mountain!</div>
+            <div class="landmark-fact"><div class="lf-dot"></div>You can ride a cable car to the top!</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="landmark-card">
+        <div class="landmark-img-wrap">
+          <img src="kingprotea.jpg" alt="The King Protea flower, national flower of South Africa" loading="lazy" style="object-position: center top;"/>
+        </div>
+        <div class="landmark-body">
+          <h3>The King Protea</h3>
+          <div class="landmark-facts">
+            <div class="landmark-fact"><div class="lf-dot"></div>National flower of South Africa</div>
+            <div class="landmark-fact"><div class="lf-dot"></div>Looks like a pink crown for a king or queen!</div>
+            <div class="landmark-fact"><div class="lf-dot"></div>Symbol of strength and beauty</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="landmark-card">
+        <div class="landmark-img-wrap">
+          <img src="boulders%20beach.jpg" alt="Boulders Beach with African penguins" loading="lazy"/>
+        </div>
+        <div class="landmark-body">
+          <h3>Boulders Beach</h3>
+          <div class="landmark-facts">
+            <div class="landmark-fact"><div class="lf-dot"></div>Home to thousands of African Penguins!</div>
+            <div class="landmark-fact"><div class="lf-dot"></div>Has giant, round rocks</div>
+            <div class="landmark-fact"><div class="lf-dot"></div>Penguins make funny donkey noises!</div>
+            <div class="landmark-fact"><div class="lf-dot"></div>Water is warm and safe</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+</body>
+</html>
